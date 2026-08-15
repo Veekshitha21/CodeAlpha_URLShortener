@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener - Shorten Your Links</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">🔗 URL Shortener</h1>
+                <p class="tagline">Make your links shorter, shareable, and trackable</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- URL Input Section -->
+            <section class="input-section card">
+                <h2>Shorten Your URL</h2>
+                <form id="shortenForm">
+                    <div class="form-group">
+                        <label for="urlInput">Enter your URL</label>
+                        <label for="customCodeInput" style="margin-top:8px; font-size:0.9em;">Optional custom short code (3-20 chars, letters/numbers/_/-)</label>
+                        <input
+                            type="text"
+                            id="customCodeInput"
+                            placeholder="e.g. my-custom-code"
+                            autocomplete="off"
+                        >
+
+                        <label for="expiresInInput" style="margin-top:8px; font-size:0.9em;">Optional expiration (minutes)</label>
+                        <input
+                            type="number"
+                            id="expiresInInput"
+                            placeholder="e.g. 60"
+                            min="1"
+                            autocomplete="off"
+                        >
+                        <div class="input-wrapper">
+                            <input
+                                type="url"
+                                id="urlInput"
+                                placeholder="https://www.example.com/very/long/url"
+                                required
+                                autocomplete="off"
+                            >
+                            <button type="submit" class="btn btn-primary" id="shortenBtn">
+                                <span class="btn-text">Shorten</span>
+                                <span class="btn-loader hidden">...</span>
+                            </button>
+                        </div>
+                        <div id="urlError" class="error-message hidden"></div>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Result Section -->
+            <section id="resultSection" class="result-section card hidden">
+                <h2>Your Shortened URL</h2>
+                
+                <div class="result-item">
+                    <div class="result-row">
+                        <span class="result-label">Original URL:</span>
+                        <span class="result-value" id="originalUrl"></span>
+                    </div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-row">
+                        <span class="result-label">Shortened URL:</span>
+                        <div class="shortened-url-container">
+                            <input
+                                type="text"
+                                id="shortenedUrl"
+                                class="shortened-url-input"
+                                readonly
+                            >
+                            <button type="button" class="btn btn-copy" id="copyBtn" title="Copy to clipboard">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                    <div id="copyFeedback" class="copy-feedback hidden">✓ Copied!</div>
+                </div>
+
+                <div class="result-actions">
+                    <button type="button" class="btn btn-secondary" id="openBtn">
+                        🌐 Open Link
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="analyticsBtn">
+                        📊 View Analytics
+                    </button>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analyticsSection" class="analytics-section card hidden">
+                <h2>📊 Analytics</h2>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <span class="analytics-label">Total Clicks</span>
+                        <span class="analytics-value" id="totalClicks">0</span>
+                    </div>
+                    <div class="analytics-card">
+                        <span class="analytics-label">Created</span>
+                        <span class="analytics-value" id="createdDate">—</span>
+                    </div>
+                    <div class="analytics-card">
+                        <span class="analytics-label">Last Accessed</span>
+                        <span class="analytics-value" id="lastAccessed">—</span>
+                    </div>
+                    <div class="analytics-card">
+                        <span class="analytics-label">Expires</span>
+                        <span class="analytics-value" id="expirationDate">—</span>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary" id="closeAnalyticsBtn">
+                    Close Analytics
+                </button>
+            </section>
+
+            <!-- URL History Section -->
+            <section id="historySection" class="history-section card">
+                <h2>📜 URL History</h2>
+                <div id="historyContainer" class="history-container">
+                    <p class="empty-state">No URLs shortened yet. Shorten one to get started!</p>
+                </div>
+            </section>
+
+            <!-- Message Display -->
+            <div id="messageContainer" class="message-container"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 URL Shortener | Making links shorter, one click at a time ✨</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
