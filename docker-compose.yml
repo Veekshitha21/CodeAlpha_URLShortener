@@ -1,0 +1,12 @@
+services:
+  url-shortener:
+    build: .
+    container_name: codealpha-url-shortener
+    ports:
+      - "5000:5000"
+    volumes:
+      - url_shortener_data:/app/backend/instance
+    restart: unless-stopped
+
+volumes:
+  url_shortener_data:
